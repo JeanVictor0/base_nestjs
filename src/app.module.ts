@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './config/postgres.config.service';
+import { LoggerModule } from './monitoring/monitoring.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { PostgresConfigService } from './config/postgres.config.service';
       useClass: PostgresConfigService,
       inject: [PostgresConfigService],
     }),
+    LoggerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
