@@ -6,6 +6,7 @@ import configuration from './config/configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './config/postgres.config.service';
 import { LoggerModule } from './monitoring/monitoring.module';
+import { DatadogTraceModule } from 'nestjs-ddtrace';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { LoggerModule } from './monitoring/monitoring.module';
       inject: [PostgresConfigService],
     }),
     LoggerModule,
+    DatadogTraceModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService],
