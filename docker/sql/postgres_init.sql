@@ -1,0 +1,13 @@
+DO
+$$
+BEGIN
+   IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'node') THEN
+      CREATE ROLE node WITH LOGIN PASSWORD 'node';
+      ALTER ROLE node WITH SUPERUSER;
+   ELSE
+      ALTER ROLE node WITH PASSWORD 'node';
+   END IF;
+END
+$$;
+
+CREATE DATABASE loja;

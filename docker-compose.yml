@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres
+    volumes:
+      - ./docker/sql/postgres_init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./docker/config/postgres/pg_hba.conf:/etc/postgresql/postgresql.conf.d/pg_hba.conf
+      - ./docker/config/postgres/postgresql.conf:/etc/postgresql/postgresql.conf.d/postgresql.conf
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_USER: "postgres"
+    ports:
+      - "5432:5432"
+
+  node:
+    container_name: nestjs
+    build:
+      context: .
+      target: NODE_DEV
+    volumes:
+      - ./:/home/node
+    ports:
+      - 3000
+
+volumes:
+  postgres:
