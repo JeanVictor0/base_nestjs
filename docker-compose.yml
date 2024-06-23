@@ -1,3 +1,4 @@
+version: '3'
 services:
   postgres:
     image: postgres
@@ -12,15 +13,36 @@ services:
     ports:
       - "5432:5432"
 
+  dd-agent:
+    container_name: dd-agent
+    image: gcr.io/datadoghq/agent:7
+    environment:
+      - DD_API_KEY=key
+      - DD_SITE=us5.datadoghq.com
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+    restart: always
+
   node:
     container_name: nestjs
     build:
       context: .
       target: NODE_DEV
+    environment:
+      - DD_AGENT_HOST=dd-agent
+      - DD_TRACE_AGENT_PORT=8126
+      - DD_LOGS_INJECTION=true
+      - DD_ENV=local_dev
     volumes:
       - ./:/home/node
     ports:
-      - 3000
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - dd-agent
 
 volumes:
   postgres:
