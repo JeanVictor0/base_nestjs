@@ -48,5 +48,4 @@ jobs:
 
       - name: Fake deploy
         run: echo 'Por enquanto não tenho conta da aws para fazer um deploy de vdd'
-          node-version: '20.x'
 
