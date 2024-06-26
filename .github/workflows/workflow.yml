@@ -8,22 +8,4 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set nodejs
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '20.x'
-
-      - name: Install depedences
-        run: |
-          set -x
-          yarn install --silent --prefer-offline --no-progress
-
-      - name: Set env
-        id: set-envs
-        run: |
-          if [ "${{ github.ref == 'refs/heads/main' }}" == "true" ]; then
-            printf "%s" "${{ secrets.ENV_PROD }}"> .env
-          fi
-
+      - uses: actions/checkout@v4
