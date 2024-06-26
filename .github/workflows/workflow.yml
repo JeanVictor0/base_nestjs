@@ -12,7 +12,10 @@ jobs:
 
       - name: Set nodejs
         uses: actions/setup-node@v1
-        with:- name: Install depedences
+        with:
+          node-version: '20.x'
+        
+      - name: Install depedences
         run: |
           set -x
           yarn install --silent --prefer-offline --no-progress
