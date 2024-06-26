@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './config/postgres.config.service';
 import { LoggerModule } from './monitoring/monitoring.module';
 import { DatadogTraceModule } from 'nestjs-ddtrace';
+import { FileManagerModule } from './file_manager/file_manager.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { DatadogTraceModule } from 'nestjs-ddtrace';
     }),
     LoggerModule,
     DatadogTraceModule.forRoot(),
+    FileManagerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
