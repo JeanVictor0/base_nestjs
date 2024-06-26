@@ -7,9 +7,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './config/postgres.config.service';
 import { LoggerModule } from './monitoring/monitoring.module';
 import { DatadogTraceModule } from 'nestjs-ddtrace';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksService } from './cron/hello';
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       envFilePath: ['.env.development', '.env'],
       isGlobal: true,
@@ -23,6 +26,6 @@ import { DatadogTraceModule } from 'nestjs-ddtrace';
     DatadogTraceModule.forRoot(),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, TasksService],
 })
 export class AppModule {}
