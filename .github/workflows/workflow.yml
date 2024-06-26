@@ -1,7 +1,12 @@
+on:
+  push:
+    branches:
+      - feature/ci
+      - main
+
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest      
     steps:
       - uses: actions/checkout@v2
 
