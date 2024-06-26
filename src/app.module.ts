@@ -9,6 +9,7 @@ import { LoggerModule } from './monitoring/monitoring.module';
 import { DatadogTraceModule } from 'nestjs-ddtrace';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TasksService } from './cron/hello';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 
 @Module({
   imports: [
@@ -21,6 +22,12 @@ import { TasksService } from './cron/hello';
     TypeOrmModule.forRootAsync({
       useClass: PostgresConfigService,
       inject: [PostgresConfigService],
+    }),
+    PrometheusModule.register({
+      path: '/mymetrics',
+      defaultMetrics: {
+        enabled: false,
+      },
     }),
     LoggerModule,
     DatadogTraceModule.forRoot(),
