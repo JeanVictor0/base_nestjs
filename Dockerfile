@@ -4,6 +4,6 @@ WORKDIR /home/node
 
 COPY . .
 
-RUN yarn --silent --prefer-offline --no-progress
+RUN npm i
 
 CMD ["npm", "run", "start:dev"]
