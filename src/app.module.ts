@@ -10,9 +10,15 @@ import { DatadogTraceModule } from 'nestjs-ddtrace';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TasksService } from './cron/hello';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import { S3Module } from 'nestjs-s3';
+import { S3ConfigService } from './config/s3.config.service';
 
 @Module({
   imports: [
+    S3Module.forRootAsync({
+      useClass: S3ConfigService,
+      inject: [S3ConfigService],
+    }),
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       envFilePath: ['.env.development', '.env'],
