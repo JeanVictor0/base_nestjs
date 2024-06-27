@@ -27,6 +27,10 @@ DB_PORT=5432
 DB_USER=node
 DB_PASSWORD=node
 DB_NAME=loja
+ACCESS_KEY_ID=teste
+SECRET_ACCESS_KEY=teste
+AWS_REGION="sa-east-1"
+AWS_ENDPOINT="http://aws:4566"
 ```
 
 Se quiser mexer com terraform, instale tflocal e executa docker compose. Com os seguintes comandos:
