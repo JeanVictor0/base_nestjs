@@ -42,6 +42,6 @@ pip install terraform-local
 cd terraform
 tflocal init
 tflocal plan
-``
+```
 
 Após isso, todas dependencias de node, infraestrutura e outros estará funcionando. Tambem, ja rodandno aplicação
